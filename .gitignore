@@ -1,0 +1,37 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Logs
+logs/
+*.log
+debug.log
+*.out
+*.pid
+*.seed
+*.pid.lock
+
+# Build files
+dist/
+build/
+.expo/
+.expo-shared/
+
+# Expo
+*.expo*
+*.expo-shared/
+.expo/settings.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# System files
+.DS_Store
+Thumbs.db
+
+# GitHub Actions caches
+.github/workflows/node_modules_
