@@ -33,7 +33,7 @@ export default function RootLayout() {
 
   return (
     <SocketProvider>
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DarkTheme}>
+    <ThemeProvider value={ DarkTheme }>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" options={{ headerShown: false }} />

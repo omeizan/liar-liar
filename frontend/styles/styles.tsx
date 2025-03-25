@@ -19,7 +19,7 @@ export const getStyles = () => {
   });
 
   const backgroundColor = useThemeColor(
-    { light: "#f5f5f5", dark: "#333" },
+    { light: "#333", dark: "#333" },
     "background"
   );
   const modalOverlayColor = useThemeColor(
@@ -27,20 +27,20 @@ export const getStyles = () => {
     "modalOverlay"
   );
   const modalContentColor = useThemeColor(
-    { light: "#f5f5f5", dark: "#333" },
+    { light: "#333", dark: "#333" },
     "modalContent"
   ); // Darker shades for modal content
   const fontColor = useThemeColor({ light: "black", dark: "white" }, "text"); // Keeping the default font color
   const buttonBackgroundColor = useThemeColor(
-    { light: orange, dark: yellow },
+    { light: yellow, dark: yellow },
     "buttonBackground"
   ); // Darker shades for button background
   const buttonBorderColor = useThemeColor(
-    { light: yellow, dark: orange },
+    { light: orange, dark: orange },
     "buttonBorder"
   ); // Darker yellow for light mode, darker orange for dark mode
   const disabledTextColor = useThemeColor(
-    { light: grey, dark: lightgrey },
+    { light: lightgrey, dark: lightgrey },
     "disabledText"
   ); // Lighter shades for disabled text
 
