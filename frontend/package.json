@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "predeploy-staging": "gh-pages --nojekyll -d dist",
+    "predeploy-staging": "npm run predeploy-staging && gh-pages --nojekyll -d dist",
     "deploy-staging": "expo export -p web",
     "predeploy-web": "expo export -p web",
     "deploy-hosting": "npm run predeploy && firebase deploy --only hosting"
