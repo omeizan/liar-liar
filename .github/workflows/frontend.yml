@@ -53,10 +53,13 @@ jobs:
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/development'
         run: |
+         
           cd frontend
-          echo "Deploying Staging..."
-          
-          npm run deploy-staging 
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d build -u "omeizan <omeizanoel@gmail.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/master'
@@ -64,3 +67,5 @@ jobs:
           cd frontend
           echo "Deploying Production..."
           npm run deploy-hosting
+
+          
