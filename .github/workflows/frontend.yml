@@ -3,7 +3,7 @@ name: Deploy Expo Frontend
 on:
   push:
     branches:
-      - develop
+      - development
       - master
 
 jobs:
@@ -46,7 +46,7 @@ jobs:
           npx expo export -p web
 
       - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/development'
         run: |
           cd frontend
           echo "Deploying Staging..."
