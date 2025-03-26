@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment: 
-      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Staging' }}
+      name: ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }}
 
     steps:
       - name: Checkout Repository
@@ -27,6 +27,19 @@ jobs:
           cd frontend
           npm install
 
+      - name: Set up Environment Variables
+        run: |
+          echo "EXPO_PUBLIC_SOCKET_URL=${{ secrets.EXPO_PUBLIC_SOCKET_URL }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_API_URL=${{ secrets.EXPO_PUBLIC_API_URL }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_API_KEY=${{ secrets.EXPO_PUBLIC_FIREBASE_API_KEY }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.EXPO_PUBLIC_FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_APP_ID=${{ secrets.EXPO_PUBLIC_FIREBASE_APP_ID }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> $GITHUB_ENV
+          echo "EXPO_PUBLIC_APP_URL=${{ secrets.EXPO_PUBLIC_APP_URL }}" >> $GITHUB_ENV
+
       - name: Build Expo Web
         run: |
           cd frontend
@@ -37,11 +50,11 @@ jobs:
         run: |
           cd frontend
           echo "Deploying Staging..."
-          npm run deploy:staging 
+          npm run deploy-staging 
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         run: |
           cd frontend
-          echo
-          npm run deploy:prod # Replace with your actual command
+          echo "Deploying Production..."
+          npm run deploy-hosting
