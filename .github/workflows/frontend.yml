@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Staging' }}
+      name: ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }}
 
     steps:
       - name: Checkout Repository
@@ -59,7 +59,7 @@ jobs:
           npm run deploy-staging 
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         run: |
           cd frontend
           echo "Deploying Production..."
