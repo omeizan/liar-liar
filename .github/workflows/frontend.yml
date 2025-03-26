@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    environment: 
+    environment:
       name: ${{ github.ref == 'refs/heads/master' && 'Production' || 'Staging' }}
 
     steps:
@@ -40,6 +40,11 @@ jobs:
           echo "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> $GITHUB_ENV
           echo "EXPO_PUBLIC_APP_URL=${{ secrets.EXPO_PUBLIC_APP_URL }}" >> $GITHUB_ENV
 
+      - name: Set Git User Identity
+        run: |
+          git config --global user.email "{{ secrets.GIT_EMAIL }}"
+          git config --global user.name "{{ secrets.GIT USERNAME }}"
+
       - name: Build Expo Web
         run: |
           cd frontend
@@ -50,6 +55,7 @@ jobs:
         run: |
           cd frontend
           echo "Deploying Staging..."
+          
           npm run deploy-staging 
 
       - name: Deploy to Production
