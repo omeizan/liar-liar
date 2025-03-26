@@ -42,8 +42,8 @@ jobs:
 
       - name: Set Git User Identity
         run: |
-          git config --global user.email ${{ secrets.GIT_EMAIL }}
-          git config --global user.name ${{ secrets.GIT_USERNAME }}
+          git config --global user.email "omeizanoel@gmail.com"
+          git config --global user.name "omeizan"
 
       - name: Debug Current Branch
         run: |
@@ -55,7 +55,7 @@ jobs:
           npx expo export -p web
 
       - name: Deploy to Staging
-        if: github.ref == 'refs/heads/development'
+        if: $GITHUB_REF == 'refs/heads/development'
         run: |
           cd frontend
           echo "Deploying Staging..."
@@ -63,7 +63,7 @@ jobs:
           npm run deploy-staging 
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/master'
+        if: $GITHUB_REF == 'refs/heads/master'
         run: |
           cd frontend
           echo "Deploying Production..."
