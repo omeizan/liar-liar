@@ -48,6 +48,8 @@ jobs:
       - name: Debug Current Branch
         run: |
           echo "Current branch is: $GITHUB_REF"
+          echo "email is ${{ secrets.GIT_EMAIL }}"
+          echo "username is ${{ secrets.GIT_USERNAME }}"
 
       - name: Build Expo Web
         run: |
