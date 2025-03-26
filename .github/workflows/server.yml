@@ -23,6 +23,7 @@ jobs:
 
       - name: Decode Firebase Credentials
         run: |
+          echo -n ${{ secrets.APP_FIREBASE_ADMIN_JSON }} | base64 --decode
           echo -n ${{ secrets.APP_FIREBASE_ADMIN_JSON }} | base64 --decode > $HOME/firebase-credentials.json
 
       - name: Authenticate with Firebase
