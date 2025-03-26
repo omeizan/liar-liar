@@ -25,7 +25,6 @@ jobs:
         run: |
           echo -n ${{ secrets.APP_FIREBASE_ADMIN_JSON }} | base64 --decode > $HOME/firebase-credentials.json
 
-
       - name: Authenticate with Firebase
         uses: google-github-actions/auth@v2
         with:
