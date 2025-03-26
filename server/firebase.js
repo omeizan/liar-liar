@@ -5,10 +5,12 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 require("dotenv").config();
 
-// Load service account JSON file
-const serviceAccount = require("../server/liar-liar-dev-firebase-adminsdk-fbsvc-b5ae4543ce.json");
 
-// Initialize Firebase Admin SDK
+const serviceAccount = JSON.parse(
+  Buffer.from(process.env.APP_FIREBASE_ADMIN_JSON, "base64").toString("utf-8")
+);
+
+
 const app = initializeApp({
   credential: cert(serviceAccount),
   storageBucket: process.env.APP_FIREBASE_STORAGE_BUCKET,
