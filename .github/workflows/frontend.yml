@@ -45,17 +45,13 @@ jobs:
           git config --global user.email "omeizanoel@gmail.com"
           git config --global user.name "omeizan"
 
-      - name: Debug Current Branch
-        run: |
-          echo "Current branch is: $GITHUB_REF"
-
       - name: Build Expo Web
         run: |
           cd frontend
           npx expo export -p web
 
       - name: Deploy to Staging
-        if: $GITHUB_REF == 'refs/heads/development'
+        if: github.ref == 'refs/heads/development'
         run: |
           cd frontend
           echo "Deploying Staging..."
@@ -63,7 +59,7 @@ jobs:
           npm run deploy-staging 
 
       - name: Deploy to Production
-        if: $GITHUB_REF == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: |
           cd frontend
           echo "Deploying Production..."
