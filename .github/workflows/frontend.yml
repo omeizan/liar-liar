@@ -7,7 +7,10 @@ on:
       - master
 
 permissions:
-  contents: write
+    contents: read
+    pages: write
+    id-token: write
+
 
 jobs:
   deploy:
@@ -18,12 +21,15 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
 
       - name: Install Dependencies
         run: |
@@ -53,15 +59,15 @@ jobs:
           cd frontend
           npx expo export -p web
 
-      - name: Deploy to Staging
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '/frontend/dist'
 
+      - name: Deploy to Staging
         if: github.ref == 'refs/heads/development'
-        run: |         
-          cd frontend
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages --nojekyll -d dist -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: deployment
+        uses: actions/deploy-pages@v4
 
 
       - name: Deploy to Production
