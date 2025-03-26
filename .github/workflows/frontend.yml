@@ -46,7 +46,8 @@ jobs:
           git config --global user.name "${{ secrets.GIT_USERNAME }}"
 
       - name: Debug Current Branch
-        run: echo "Current branch is: $GITHUB_REF"
+        run: |
+          echo "Current branch is: $GITHUB_REF"
 
       - name: Build Expo Web
         run: |
