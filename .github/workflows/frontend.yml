@@ -65,7 +65,9 @@ jobs:
         with:
           credentials_json: ${{ secrets.APP_FIREBASE_ADMIN_JSON }}
 
-      - name: Deploy
-        id: deployment
+      - name: Deploy to Firebase Hosting
         run: |
-          firebase deploy --only hosting --project {{ secrets.EXPO_PUBLIC_FIREBASE_PROJECT_ID }} :$([[ "${{ github.ref }}" == "refs/heads/master" ]] && echo "production" || echo "staging")
+          TARGET=$(if [ "${GITHUB_REF}" == "refs/heads/master" ]; then echo "production"; else echo "staging"; fi)
+          echo "Deploying to Firebase Hosting ($TARGET)..."
+          firebase deploy --only hosting --project ${{ secrets.EXPO_PUBLIC_FIREBASE_PROJECT_ID }} --message "Deployed to $TARGET" --target $TARGET
+
