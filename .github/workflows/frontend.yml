@@ -69,5 +69,4 @@ jobs:
         if: github.ref == 'refs/heads/development'
         id: deployment
         run: |
-          jq '.hosting.public = "frontend/dist"' firebase.json > tmp.$$.json && mv tmp.$$.json firebase.json
           firebase deploy --only hosting:$([[ "${{ github.ref }}" == "refs/heads/master" ]] && echo "production" || echo "staging")
