@@ -10,6 +10,8 @@ const serviceAccount = JSON.parse(
   Buffer.from(process.env.APP_FIREBASE_ADMIN_JSON, "base64").toString("utf-8")
 );
 
+console.log(serviceAccount)
+
 
 const app = initializeApp({
   credential: cert(serviceAccount),

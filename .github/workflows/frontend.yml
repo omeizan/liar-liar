@@ -64,17 +64,13 @@ jobs:
         with:
           path: 'frontend/dist'
 
-      - name: Deploy to Staging
+      - name: Authenticate with Firebase
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Deploy
         if: github.ref == 'refs/heads/development'
         id: deployment
-        uses: actions/deploy-pages@v4
-
-
-      - name: Deploy to Production
-        if: github.ref == 'refs/heads/master'
         run: |
-          cd frontend
-          echo "Deploying Production..."
-          npm run deploy-hosting
-
-          
+          firebase deploy --only hosting:$([[ "${{ github.ref }}" == "refs/heads/master" ]] && echo "production" || echo "staging")
