@@ -55,5 +55,7 @@ jobs:
       - name: Deploy to Production
         if: github.ref == 'refs/heads/master'
         run: |
-          echo "Deploying Production Firebase Functions..."
-          firebase deploy --only functions --project ${{ secrets.FIREBASE_PROD_PROJECT }}
+          npm install -g firebase-tools
+          jq '.hosting.public = "frontend/dist"' firebase.json > tmp.$$.json && mv tmp.$$.json firebase.json
+          echo "Deploying Staging Hosting + Functions..."
+          firebase deploy --only hosting,functions --project ${{ secrets.APP_FIREBASE_PROJECT_ID }}
