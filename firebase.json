@@ -2,8 +2,8 @@
   "hosting": {
     "public": "frontend/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [{ "source": "**", "destination": "server/(tabs)/index.html" }],
-    "errorPage": "server/_not-found.html",
+    "rewrites": [{ "source": "**", "destination": "(tabs)/index.html" }],
+    "errorPage": "/_not-found.html",
     "headers": [
       {
         "source": "/assets/**",
