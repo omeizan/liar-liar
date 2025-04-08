@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "frontend/dist",
+    "public": "frontend/dist/server",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [{ "source": "**", "destination": "(tabs)/index.html" }],
     "errorPage": "/_not-found.html",
